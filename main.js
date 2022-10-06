@@ -7,24 +7,9 @@ const ws = makeWASocket({
     auth: state
 })
 
+require('./interactionFunctionsImplementation.js')(ws);
+
 if (ws.user && ws.user.id) ws.user.jid = jidNormalizedUser(ws.user.id)
-
-// _____________________________________________________________
-const reply = (input_text) => {
-    ws.sendMessage(messageObj.key.remoteJid, { text: input_text })
-}
-ws.reply = reply;
-
-ws.sendButtonMsg = (jid, text = '', footer = '', but = []) => {
-    let templateButtons = but
-    var templateMessage = {
-        text: text,
-        footer: footer,
-        templateButtons: templateButtons
-    }
-    ws.sendMessage(jid, templateMessage)
-}
-
 // _______________________________________________________________
 
 ws.ev.on('connection.update', async (update) => {
@@ -42,3 +27,15 @@ ws.ev.on('messages.upsert', async chatUpdate => {
         console.log(err)
     }
 })
+
+// _______________________________________________________________
+// listen every 10 minutes for updates on the college website
+
+
+
+
+
+
+
+
+

@@ -1,17 +1,5 @@
 var request = require('request');
 const productionURI = 'https://ramesh-nine.vercel.app/api';
-const postAndReturn = async (relativeUrl, object) => {
-    request.post(
-        productionURI+relativeUrl,
-        { json: object },
-        (err, res, body) => {
-            if (!err && res.statusCode == 200) {
-                return body;
-            }
-        }
-    );    
-}
-
 // make post and return and get subjects work somehow
 
 module.exports = applicationLogic = async (ws, chatUpdate) => {
