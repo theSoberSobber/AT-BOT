@@ -22,7 +22,13 @@ module.exports = applicationLogic = async (ws, chatUpdate) => {
             { json: object },
             (err, res, body) => {
                 if (!err && res.statusCode == 200) {
-                    ws.reply(body);
+                    if(typeof res.body != 'string'){
+                        for(let i=0;i<res.body.length;i++){
+                            ws.reply(res.body[i]);
+                        }
+                    } else {
+                        ws.reply(res.body);
+                    }
                 }
             }
         );    
@@ -37,7 +43,7 @@ module.exports = applicationLogic = async (ws, chatUpdate) => {
 
     messageObj = chatUpdate.messages[0];
     // console.log('---------------------');
-    // console.log(messageObj);
+    console.log(messageObj);
     let body = messageObj.message.conversation.toLowerCase();
     let senderJid;
     let groupId;
@@ -49,7 +55,7 @@ module.exports = applicationLogic = async (ws, chatUpdate) => {
         senderJid = messageObj.key.remoteJid;
     }
 
-    // console.log(messageObj.pushName); // Messeage jisne bheja
+    console.log(messageObj.pushName); // Messeage jisne bheja
     // console.log(groupId); // groupid
     // console.log(senderJid); // phone no
     // console.log(body); // message text
@@ -64,12 +70,16 @@ module.exports = applicationLogic = async (ws, chatUpdate) => {
             switch (command) {
                 // case _________________________________
                 case 'present':
-                case 'p':
+                case 'p': {
                     // const subjectArr = await postAndReturn('/getSubjects', {'gno': '1234567890@g.us'});
                     // console.log(subjectArr);
                     // postAndReply('/getSubjects', {'gno': '1234567890@g.us'});
                     postAndReply('/attendance', { 'pnum': senderJid, 'subject': args[0] });
                 // case __________________________________
+                }
+                // case subjects: {
+                    // postAndReply('/getSubjects', {'gno': groudId});
+                // }
             }
         }
     }
