@@ -7,7 +7,7 @@ const ws = makeWASocket({
     auth: state
 })
 
-require('./interactionFunctionsImplementation.js')(ws);
+require('./abstractions/interactionFunctionsImplementation.js')(ws);
 
 if (ws.user && ws.user.id) ws.user.jid = jidNormalizedUser(ws.user.id)
 // _______________________________________________________________
@@ -23,7 +23,7 @@ ws.ev.on('connection.update', async (update) => {
 // ______________________________________________________________
 ws.ev.on('messages.upsert', async chatUpdate => {
     try {        
-        require('./applicationLogic.js')(ws, chatUpdate);
+        require('./features/applicationLogic.js')(ws, chatUpdate);
     } catch (err) {
         console.log(err)
     }
@@ -32,7 +32,7 @@ ws.ev.on('messages.upsert', async chatUpdate => {
 // _______________________________________________________________
 // listen every X minutes for updates on the college website
 
-const { checkAndReturn } = require('./getUpdates.js');
+const { checkAndReturn } = require('./features/updates/getUpdates.js');
 
 const main = async () => {
     const result = await checkAndReturn();

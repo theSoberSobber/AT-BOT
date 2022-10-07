@@ -1,4 +1,4 @@
-const { checkAndReturn } = require('./getUpdates.js');
+const { checkAndReturn } = require('./features/updates/getUpdates.js');
 
 const main = async () => {
     const result = await checkAndReturn();
