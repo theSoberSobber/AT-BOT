@@ -57,7 +57,7 @@ module.exports = applicationLogic = async (ws, chatUpdate) => {
                     for(var i=0; i<subjectArr.length; i++){
                         ws.reply(`Your attendance in ${subjectArr[i]} is {percentageArray[i]}.`);
                     }
-
+                    break;
                 // case __________________________________
             }
         }
