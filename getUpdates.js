@@ -1,6 +1,13 @@
+// NOT WORKING AS EXPECTED AND NOT READY FOR DEPLOYMENT
+// BUT ON TECHNICAL LEVEL, EVERYHTING WORKS NOW
+
 const cheerio = require('cheerio');
 const request = require('request');
 const fs = require('fs');
+const util = require('util');
+
+// Convert fs.readFile into Promise version of same    
+const readFile = util.promisify(fs.readFile);
 
 const manitParser = () => {
     var options = {
@@ -46,29 +53,30 @@ async function checkAndReturn(){
     return new Promise(
         async (resolve, reject) => {
             var list = await manitParser();
-            const fileContentsLinks = await fs.promises.readFile('./lastJsonDump.json').links;
-            console.log(fileContentsLinks); // this is undefined for some reason
-            // check for differnce or not
             var out = {
                 innerText: [],
                 links: []
             };
             var empty_out = out;
-            for(let i=0; i<list.links.length; i++){
-                for(let j=0; j<fileContentsLinks.length; j++){
-                    if(list.links[i]!=fileContentsLinks[j]){
-                        out.innerText.push(list.innerText[i]);
-                        out.links.push(list.links[i]);
+            await readFile('./lastJsonDump.json', "utf8").then( (data) => {
+                fileContent = JSON.parse(data);
+                for(let i=0; i<list.links.length; i++){
+                    for(let j=0; j<fileContent.links.length; j++){
+                        if(list.links[i]!=fileContent.links[j]){
+                            out.innerText.push(list.innerText[i]);
+                            out.links.push(list.links[i]);
+                        }
                     }
                 }
-            }
-            // now already searched, do dump in the file
-            await fs.promises.writeFile('./lastJsonDump.json', list);
+            })
+            console.log('I am empty out:', empty_out);
+            // console.log(out);
             // now if out is not empty then reply that, otherwise nothing
             if(empty_out != out){
+                await fs.promises.writeFile('./lastJsonDump.json', JSON.stringify(list));
                 resolve(out);
             } else {
-                resolve();
+                resolve(0);
             }
         }
     )

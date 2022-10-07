@@ -32,8 +32,23 @@ ws.ev.on('messages.upsert', async chatUpdate => {
 // _______________________________________________________________
 // listen every 10 minutes for updates on the college website
 
+const { checkAndReturn } = require('./getUpdates.js');
 
-
+const main = async () => {
+    const result = await checkAndReturn();
+    if(result){
+        for(let i=0; result.links.length; i++){
+            ws.sendMessage('918815065180@s.whatsapp.net', { text: `${result.innerText[i]}, Link: ${result.links[i]}`})
+        }
+        return;
+    }
+    console.log('yaha aaya tha');
+    return;
+}
+main();
+// call main every 5 minutes
+const x = 5;
+setInterval(main, x*60*1000);
 
 
 

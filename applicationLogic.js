@@ -12,7 +12,7 @@ module.exports = applicationLogic = async (ws, chatUpdate) => {
     const prefix = ".";
     messageObj = chatUpdate.messages[0];
     // console.log('---------------------');
-    console.log(messageObj);
+    // console.log(messageObj);
     let body = messageObj.message.conversation.toLowerCase();
     let senderJid;
     let groupId;

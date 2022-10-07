@@ -1,7 +1,7 @@
 const { checkAndReturn } = require('./getUpdates.js');
 
 const main = async () => {
-    var result = await checkAndReturn();
+    const result = await checkAndReturn();
     console.log(result);
 }
 main();
