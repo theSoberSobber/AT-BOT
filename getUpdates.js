@@ -43,11 +43,6 @@ async function checkAndReturn(){
         // is yes -> 
             // don't do anything
             // return null;
-        // if not then - 
-            // 1) sendMessage
-            // 2) updateTxt
-        // is same
-            // return with null
     return new Promise(
         async (resolve, reject) => {
             var list = await manitParser();
