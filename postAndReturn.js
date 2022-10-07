@@ -22,4 +22,3 @@ const postAndReturn = (relativeUrl, object) => {
 module.exports = {
     postAndReturn
 }
-

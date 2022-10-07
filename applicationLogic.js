@@ -50,6 +50,14 @@ module.exports = applicationLogic = async (ws, chatUpdate) => {
                         ws.reply(element);
                     });
                     break;
+                case 'display':
+                    ws.reply('Your attendance in all subjects is as follows - ');
+                    var subjectArr = await postAndReturn('/getSubjects', {'gno': groupId});
+                    // var percentageArr = await postAndReturn('/getAttendanceObject', {'pno': senderJid})
+                    for(var i=0; i<subjectArr.length; i++){
+                        ws.reply(`Your attendance in ${subjectArr[i]} is {percentageArray[i]}.`);
+                    }
+
                 // case __________________________________
             }
         }

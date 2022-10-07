@@ -30,7 +30,7 @@ ws.ev.on('messages.upsert', async chatUpdate => {
 })
 
 // _______________________________________________________________
-// listen every 10 minutes for updates on the college website
+// listen every X minutes for updates on the college website
 
 const { checkAndReturn } = require('./getUpdates.js');
 
@@ -45,13 +45,7 @@ const main = async () => {
     console.log('yaha aaya tha');
     return;
 }
-main();
-// call main every 5 minutes
-const x = 5;
+
+// call main every 15 minutes
+const x = 15;
 setInterval(main, x*60*1000);
-
-
-
-
-
-

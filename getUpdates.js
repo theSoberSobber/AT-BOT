@@ -69,7 +69,7 @@ async function checkAndReturn(){
                     }
                 }
             })
-            console.log('I am empty out:', empty_out);
+            console.log('I am empty out:', out);
             // console.log(out);
             // now if out is not empty then reply that, otherwise nothing
             if(empty_out != out){
