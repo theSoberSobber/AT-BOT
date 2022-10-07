@@ -1,34 +1,15 @@
 var request = require('request');
-const productionURI = 'https://ramesh-nine.vercel.app/api';
-// make post and return and get subjects work somehow
+const { postAndReturn } = require('./postAndReturn.js')
+
+// decided user flow ->
+// phone no.
+// group id - > college, branch, section.
+// get subject from mongodb
+// create buttons OR confirm input from user
 
 module.exports = applicationLogic = async (ws, chatUpdate) => {
 
-    const postAndReply = (relativeUrl, object) => {
-        request.post(
-            productionURI+relativeUrl,
-            { json: object },
-            (err, res, body) => {
-                if (!err && res.statusCode == 200) {
-                    if(typeof res.body != 'string'){
-                        for(let i=0;i<res.body.length;i++){
-                            ws.reply(res.body[i]);
-                        }
-                    } else {
-                        ws.reply(res.body);
-                    }
-                }
-            }
-        );    
-    }
-
     const prefix = ".";
-    // decided user flow ->
-    // phone no.
-    // group id - > college, branch, section.
-    // get subject from mongodb
-    // create buttons OR confirm input from user
-
     messageObj = chatUpdate.messages[0];
     // console.log('---------------------');
     console.log(messageObj);
@@ -58,16 +39,18 @@ module.exports = applicationLogic = async (ws, chatUpdate) => {
             switch (command) {
                 // case _________________________________
                 case 'present':
-                case 'p': {
-                    // const subjectArr = await postAndReturn('/getSubjects', {'gno': '1234567890@g.us'});
-                    // console.log(subjectArr);
-                    // postAndReply('/getSubjects', {'gno': '1234567890@g.us'});
-                    postAndReply('/attendance', { 'pnum': senderJid, 'subject': args[0] });
+                case 'p': 
+                    const reply = await postAndReturn('/attendance', { 'pnum': senderJid, 'subject': args[0] });
+                    ws.reply(reply);
+                    break;
                 // case __________________________________
-                }
-                // case subjects: {
-                    // postAndReply('/getSubjects', {'gno': groudId});
-                // }
+                case 'subjects':
+                    var subjectArr = await postAndReturn('/getSubjects', {'gno': groupId});
+                    subjectArr.forEach(element => {
+                        ws.reply(element);
+                    });
+                    break;
+                // case __________________________________
             }
         }
     }
