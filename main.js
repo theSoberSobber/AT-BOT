@@ -13,7 +13,7 @@ if (ws.user && ws.user.id) ws.user.jid = jidNormalizedUser(ws.user.id)
 // _______________________________________________________________
 
 ws.ev.on('connection.update', async (update) => {
-    const {connection} = update;
+    const { connection } = update;
     if (connection === "open") {
         console.log("Connection Successful!");
         ws.sendMessage('918815065180@s.whatsapp.net', { text: 'Connected Successfully' })
@@ -22,7 +22,7 @@ ws.ev.on('connection.update', async (update) => {
 
 // ______________________________________________________________
 ws.ev.on('messages.upsert', async chatUpdate => {
-    try {        
+    try {
         require('./features/applicationLogic.js')(ws, chatUpdate);
     } catch (err) {
         console.log(err)
@@ -33,14 +33,13 @@ ws.ev.on('messages.upsert', async chatUpdate => {
 // listen every X minutes for updates on the college website
 
 const { checkAndReturn } = require('./features/updates/getUpdates.js');
-const pathOfDump = "./lastJsonDump.json";
+const pathOfDump = "./data.json";
 
 const main = async () => {
     const result = await checkAndReturn(pathOfDump);
-    if(result){
-        for(let i=0; result.links.length; i++){
-            ws.sendMessage('918815065180@s.whatsapp.net', { text: `${result.innerText[i]}, Link: ${result.links[i]}`})
-        }
+    if (result) {
+        for (const i of result)
+            ws.sendMessage('918815065180@s.whatsapp.net', { text: `${i.innerText}, Link: ${i.link}` })
         return;
     }
     console.log('yaha aaya tha');
@@ -48,6 +47,6 @@ const main = async () => {
 }
 
 // call main every 15 minutes
-const x = 15;
+const x = 5 / 60;
 main();
-setInterval(main, x*60*1000);
+setInterval(main, x * 60 * 1000);
