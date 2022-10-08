@@ -60,12 +60,10 @@ async function checkAndReturn(){
             var empty_out = out;
             await readFile('./lastJsonDump.json', "utf8").then( (data) => {
                 fileContent = JSON.parse(data);
-                for(let i=0; i<list.links.length; i++){
-                    for(let j=0; j<fileContent.links.length; j++){
-                        if(list.links[i]!=fileContent.links[j]){
+                for(let i=0; i<Math.min(list.links.length, fileContent.links.length); i++){
+                        if(list.links[i]!=fileContent.links[i]){
                             out.innerText.push(list.innerText[i]);
                             out.links.push(list.links[i]);
-                        }
                     }
                 }
             })
