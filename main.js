@@ -7,7 +7,7 @@ const ws = makeWASocket({
     auth: state
 })
 
-require('./abstractions/interactionFunctionsImplementation.js')(ws);
+require('./abstractions/interactionFunctions.js')(ws);
 
 if (ws.user && ws.user.id) ws.user.jid = jidNormalizedUser(ws.user.id)
 // _______________________________________________________________
