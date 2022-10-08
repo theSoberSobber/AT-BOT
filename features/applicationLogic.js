@@ -39,26 +39,26 @@ module.exports = applicationLogic = async (ws, chatUpdate) => {
             switch (command) {
                 // case _________________________________
                 case 'present':
-                case 'p': 
+                case 'p':
                     const reply = await postAndReturn('/attendance', { 'pnum': senderJid, 'subject': args[0] });
                     ws.reply(reply);
                     break;
                 // case __________________________________
                 case 'subjects':
-                    var subjectArr = await postAndReturn('/getSubjects', {'gno': groupId});
+                    var subjectArr = await postAndReturn('/getSubjects', { 'gno': groupId });
                     subjectArr.forEach(element => {
                         ws.reply(element);
                     });
                     break;
                 case 'display':
                     ws.reply('Your attendance in all subjects is as follows - ');
-                    var subjectArr = await postAndReturn('/getSubjects', {'gno': groupId});
-                    var percentageArr = await postAndReturn('/getAttendanceArr', {'pno': senderJid})
-                    for(var i=0; i<subjectArr.length; i++){
+                    var subjectArr = await postAndReturn('/getSubjects', { 'gno': groupId });
+                    var percentageArr = await postAndReturn('/getAttendanceArr', { 'pno': senderJid })
+                    for (var i = 0; i < subjectArr.length; i++) {
                         ws.reply(`Your attendance in ${subjectArr[i]} is ${percentageArr[i]}.`);
                     }
                     break;
-                case '.help' : case 'menu': case '?':
+                case '.help': case 'menu': case '?':
                     const helpString = `
                     .p <subName>
                     .display

@@ -17,6 +17,8 @@
   "dependencies": {
     "@adiwajshing/baileys": "latest",
     "cheerio": "^1.0.0-rc.12",
+    "node-fetch": "^3.2.10",
+    "nodemon": "^2.0.20",
     "request": "^2.88.2",
     "util": "^0.12.4"
   }

@@ -8,7 +8,7 @@ module.exports = iFunctions = async (ws) => {
         ws.sendMessage(messageObj.key.remoteJid, { text: input_text })
     }
     ws.reply = reply;
-    
+
     // untested though
     ws.sendButtonMsg = (jid, text = '', footer = '', but = []) => {
         let templateButtons = but
