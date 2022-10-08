@@ -2,7 +2,6 @@
 
 Remaining Tasks Till Completion:
 
-- fix the update selection mechanism of the updates feature
 - implement a init method for students to be able to initialize their instance until now
 
 ---
