@@ -48,4 +48,5 @@ const main = async () => {
 
 // call main every 15 minutes
 const x = 15;
+main();
 setInterval(main, x*60*1000);
