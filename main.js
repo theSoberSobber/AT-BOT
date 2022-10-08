@@ -33,9 +33,10 @@ ws.ev.on('messages.upsert', async chatUpdate => {
 // listen every X minutes for updates on the college website
 
 const { checkAndReturn } = require('./features/updates/getUpdates.js');
+const pathOfDump = "./lastJsonDump.json";
 
 const main = async () => {
-    const result = await checkAndReturn();
+    const result = await checkAndReturn(pathOfDump);
     if(result){
         for(let i=0; result.links.length; i++){
             ws.sendMessage('918815065180@s.whatsapp.net', { text: `${result.innerText[i]}, Link: ${result.links[i]}`})

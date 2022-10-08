@@ -40,7 +40,7 @@ const manitParser = () => {
 // meant to return link if there is something new
 // otherwise null
 // all this is supposed to be returned in promises
-async function checkAndReturn(){
+async function checkAndReturn(pathOfDump){
     // flow of function
         // fetch updates
         // check for each link if it exists in the last recent JSON dump
@@ -58,7 +58,7 @@ async function checkAndReturn(){
                 links: []
             };
             var empty_out = out;
-            await readFile('./lastJsonDump.json', "utf8").then( (data) => {
+            await readFile(pathOfDump, "utf8").then( (data) => {
                 fileContent = JSON.parse(data);
                 for(let i=0; i<Math.min(list.links.length, fileContent.links.length); i++){
                         if(list.links[i]!=fileContent.links[i]){
@@ -71,7 +71,7 @@ async function checkAndReturn(){
             // console.log(out);
             // now if out is not empty then reply that, otherwise nothing
             if(empty_out != out){
-                await fs.promises.writeFile('./lastJsonDump.json', JSON.stringify(list));
+                await fs.promises.writeFile(pathOfDump, JSON.stringify(list));
                 resolve(out);
             } else {
                 resolve(0);

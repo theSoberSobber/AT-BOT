@@ -53,10 +53,18 @@ module.exports = applicationLogic = async (ws, chatUpdate) => {
                 case 'display':
                     ws.reply('Your attendance in all subjects is as follows - ');
                     var subjectArr = await postAndReturn('/getSubjects', {'gno': groupId});
-                    // var percentageArr = await postAndReturn('/getAttendanceArr', {'pno': senderJid})
+                    var percentageArr = await postAndReturn('/getAttendanceArr', {'pno': senderJid})
                     for(var i=0; i<subjectArr.length; i++){
-                        ws.reply(`Your attendance in ${subjectArr[i]} is {percentageArray[i]}.`);
+                        ws.reply(`Your attendance in ${subjectArr[i]} is ${percentageArr[i]}.`);
                     }
+                    break;
+                case '.help' : case 'menu': case '?':
+                    const helpString = `
+                    .p <subName>
+                    .display
+                    .subjects -> to view the abbr. to be used
+                    `;
+                    ws.reply(helpString);
                     break;
                 // case __________________________________
             }
