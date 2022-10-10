@@ -19,7 +19,4 @@ Problems Left to Adress: (not to be solved here)
 ---
 
 If anyone decides to contribute, thank you
-
----
-
 Please follow the structure of the project and your pull will surely be accepted. Thanks again!
