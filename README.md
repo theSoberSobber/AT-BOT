@@ -2,6 +2,9 @@
 
 Remaining Tasks Till Completion:
 
+- implement proper handling to prevent the frequent crashes
+    - remove all console logs
+    - wrap main.js in startBot() function and call startBot() in all catch blocks to start bot again after crashes
 - implement a init method for students to be able to initialize their instance until now
 
 ---

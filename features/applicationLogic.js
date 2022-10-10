@@ -13,7 +13,10 @@ module.exports = applicationLogic = async (ws, chatUpdate) => {
     messageObj = chatUpdate.messages[0];
     // console.log('---------------------');
     // console.log(messageObj);
-    let body = messageObj.message.conversation.toLowerCase();
+    let body;
+    if(messageObj.message){
+        body = messageObj.message.conversation.toLowerCase();
+    }
     let senderJid;
     let groupId;
     if (messageObj.key.participant) {

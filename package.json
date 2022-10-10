@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "@adiwajshing/baileys": "latest",
+    "axios": "^1.1.2",
     "cheerio": "^1.0.0-rc.12",
     "node-fetch": "^3.2.10",
     "nodemon": "^2.0.20",

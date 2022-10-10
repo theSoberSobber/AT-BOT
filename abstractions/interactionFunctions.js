@@ -2,7 +2,7 @@
 // Take care to define all here as a method of the ws object as they need to be accesible to other files
 // without needing to import this file in the applicationLogic script 
 // _____________________________________________________________
-
+const { getBuffer } = require('./getBuffer.js')
 module.exports = iFunctions = async (ws) => {
     const reply = (input_text) => {
         ws.sendMessage(messageObj.key.remoteJid, { text: input_text })
@@ -18,6 +18,15 @@ module.exports = iFunctions = async (ws) => {
             templateButtons: templateButtons
         }
         ws.sendMessage(jid, templateMessage)
+    }
+
+    ws.sendFile = async (jid, url, caption) => {
+        const fileObj = {
+            document: await getBuffer(url),
+            mimetype: 'application/pdf',
+            caption: caption
+        }
+        ws.sendMessage(jid, fileObj);
     }
     //________________________________________________________________________________________
 }

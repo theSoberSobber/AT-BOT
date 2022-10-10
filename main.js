@@ -39,14 +39,19 @@ const main = async () => {
     const result = await checkAndReturn(pathOfDump);
     if (result) {
         for (const i of result)
-            ws.sendMessage('918815065180@s.whatsapp.net', { text: `${i.innerText}, Link: ${i.link}` })
+        // implment better way using axios headers and content-type['application/pdf'] checking
+            // var ext = i.link.slice(-4)
+            if(i.link.slice(-4) == ".pdf"){
+                await ws.sendFile('918815065180@s.whatsapp.net', i.link, i.innerText);
+            } else {
+                await ws.sendMessage('918815065180@s.whatsapp.net', { text: `${i.innerText}, Link: ${i.link}` })
+            }
         return;
     }
-    console.log('yaha aaya tha');
     return;
 }
 
 // call main every 15 minutes
-const x = 5 / 60;
+const x = 1 / 60;
 main();
 setInterval(main, x * 60 * 1000);
