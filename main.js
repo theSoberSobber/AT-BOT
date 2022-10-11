@@ -8,7 +8,7 @@ const ws = makeWASocket({
     browser: ["Ramesh", "Ramesh-Connections", "1.0"],
     auth: state
 })
-
+const config = require('./AlertBot.config.js');
 require('./abstractions/interactionFunctions.js')(ws);
 
 if (ws.user && ws.user.id) ws.user.jid = jidNormalizedUser(ws.user.id)
@@ -18,7 +18,7 @@ ws.ev.on('connection.update', async (update) => {
     const { connection } = update;
     if (connection === "open") {
         console.log("Connection Successful!");
-        ws.sendMessage('918815065180@s.whatsapp.net', { text: 'Connected Successfully' })
+        ws.sendMessage(jid, { text: 'Connected Successfully' })
     }
 })
 
@@ -44,11 +44,14 @@ const main = async () => {
         // implment better way using axios headers and content-type['application/pdf'] checking
             // var ext = i.link.slice(-4)
             if(i.link.slice(-4) == ".pdf"){
-                await ws.sendFile('918815065180@s.whatsapp.net', i.link, i.innerText);
+                await ws.sendFile(jid, i.link, i.innerText);
+                await ws.sendMessage(jid, { text: `Brought to you by https://alert-bot.vercel.app` })
             } else if (i.link.slice(-4) == ".jpg") {
-                await ws.sendImage('918815065180@s.whatsapp.net', i.link, i.innerText);
+                await ws.sendImage(jid, i.link, i.innerText);
+                await ws.sendMessage(jid, { text: `Brought to you by https://alert-bot.vercel.app` })
             } else {
-                await ws.sendMessage('918815065180@s.whatsapp.net', { text: `${i.innerText}, Link: ${i.link}` })
+                await ws.sendMessage(jid, { text: `${i.innerText}, Link: ${i.link}` })
+                await ws.sendMessage(jid, { text: `Brought to you by https://alert-bot.vercel.app` })
             }
         return;
     }

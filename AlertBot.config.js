@@ -1,0 +1,1 @@
+global.jid = '918815065180@s.whatsapp.net';
