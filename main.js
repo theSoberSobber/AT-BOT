@@ -1,8 +1,10 @@
 const { default: makeWASocket, useSingleFileAuthState, jidNormalizedUser } = require("@adiwajshing/baileys");
 const { state } = useSingleFileAuthState('./sesi.json');
 
+const pino = require('pino');
+
 const ws = makeWASocket({
-    printQRInTerminal: true,
+    logger: pino({ level: 'silent' }),
     browser: ["Ramesh", "Ramesh-Connections", "1.0"],
     auth: state
 })
@@ -43,6 +45,8 @@ const main = async () => {
             // var ext = i.link.slice(-4)
             if(i.link.slice(-4) == ".pdf"){
                 await ws.sendFile('918815065180@s.whatsapp.net', i.link, i.innerText);
+            } else if (i.link.slice(-4) == ".jpg") {
+                await ws.sendImage('918815065180@s.whatsapp.net', i.link, i.innerText);
             } else {
                 await ws.sendMessage('918815065180@s.whatsapp.net', { text: `${i.innerText}, Link: ${i.link}` })
             }
@@ -52,6 +56,6 @@ const main = async () => {
 }
 
 // call main every 15 minutes
-const x = 1 / 60;
+const x = 60 / 60;
 main();
 setInterval(main, x * 60 * 1000);

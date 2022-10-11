@@ -28,5 +28,13 @@ module.exports = iFunctions = async (ws) => {
         }
         ws.sendMessage(jid, fileObj);
     }
+
+    ws.sendImage = async (jid, url, caption) => {
+        const fileObj = {
+            image: await getBuffer(url),
+            caption: caption
+        }
+        ws.sendMessage(jid, fileObj);
+    }
     //________________________________________________________________________________________
 }

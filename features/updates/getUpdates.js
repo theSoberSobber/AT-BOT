@@ -54,5 +54,5 @@ module.exports = {
 }
 
 if (require.main === module) {
-    checkAndReturn("data.json");
+    checkAndReturn("../data.json");
 }
