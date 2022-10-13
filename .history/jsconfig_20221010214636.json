@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+      "target": "es6",
+      "baseUrl": "./",
+      "paths": {
+        "@controllers/": ["node/controllers/"],
+      },
+    },
+    "exclude": ["node_modules"]
+}

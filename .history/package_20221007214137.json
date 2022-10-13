@@ -1,0 +1,20 @@
+{
+  "name": "bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "production": "node main.js",
+    "dev": "nodemon main.js",
+    "start": "node main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@adiwajshing/baileys": "latest",
+    "cheerio": "^1.0.0-rc.12",
+    "request": "^2.88.2",
+    "util": "^0.12.4"
+  }
+}

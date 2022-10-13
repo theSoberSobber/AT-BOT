@@ -1,0 +1,4 @@
+"{
+    "innerText":["Schedule For Even/odd Semester MID Term Examination, October 2022 ","Admission Section ","List of provisionally Eligible and provisionally Ineligible (Not eligible) Candidates for the Post of Assistant Professor (Grade II AGP 6000/7000 and Grade I AGP 8000) "],
+    "links":["http://www.manit.ac.in/sites/default/files/Semester%20MID%20Term.jpg","http://www.manit.ac.in/admission-section","http://www.manit.ac.in/content/list-provisionally-eligible-and-provisionally-ineligible-not-eligible-candidates-post"]
+}"
